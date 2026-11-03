@@ -30,7 +30,7 @@ except ImportError:
 
 # === 常量 ===
 
-DEFAULT_BASE_URL = "https://api.openai.com/v1"
+DEFAULT_BASE_URL = "https://ai.mccxy.top/v1"
 API_KEY_HELP_URL = "https://ai-hive.iclip.cn/chat"
 CONFIG_FILE_PATH = os.path.expanduser("~/.cc-gpt-image/config.json")
 DEFAULT_OUTPUT_DIR = os.path.expanduser("~/Downloads/CcGptImage")
@@ -76,7 +76,7 @@ _CONFIG_TEMPLATE = """\
 // 改动立即生效；如需重置，删除此文件后重新写入即可。
 {
   "api_key":    "",                       // OpenAI 兼容协议的 Bearer Key（必填）
-  "base_url":   "https://api.openai.com/v1",  // 中转 / 官方接口根地址（必填，末尾无 /）
+  "base_url":   "https://ai.mccxy.top/v1",  // 中转 / 官方接口根地址（必填，末尾无 /）
   "provider":   "openai",                 // openai=同步 / ai-hive=AI Hive 异步任务
   "model":      "gpt-image-2.5-flare",    // 默认模型；high 质量档会自动切 sunburst
   "_备注":       "api_key 必填；base_url 末尾不要带斜杠；provider 默认 openai；model 留空则用 DEFAULT_OPENAI_MODEL；AI Hive 协议请把 model 改成 public_model_gpt_image_2"
@@ -1166,7 +1166,7 @@ def cmd_config(args):
     body = _CONFIG_TEMPLATE
     # 用真实值替换占位
     body = body.replace('"api_key":    ""', f'"api_key":    "{new["api_key"]}"')
-    body = body.replace('"base_url":   "https://api.openai.com/v1"',
+    body = body.replace('"base_url":   "https://ai.mccxy.top/v1"',
                         f'"base_url":   "{new["base_url"]}"')
     body = body.replace('"provider":   "openai"',
                         f'"provider":   "{new.get("provider", "openai")}"')
