@@ -11,18 +11,21 @@
 
 ```
 git clone https://github.com/ohXiaoMing996/cc-gpt-image-2.5-skill ~/.codex/skills/cc-gpt-image-2.5-skill
+# 国内速度更快：git clone https://gitee.com/OhXiaoming/cc-gpt-image-2.5-skill ~/.codex/skills/cc-gpt-image-2.5-skill
 ```
 
 ### WorkBuddy
 
 ```
 git clone https://github.com/ohXiaoMing996/cc-gpt-image-2.5-skill ~/.workbuddy/skills/cc-gpt-image-2.5-skill
+# 国内速度更快：git clone https://gitee.com/OhXiaoming/cc-gpt-image-2.5-skill ~/.workbuddy/skills/cc-gpt-image-2.5-skill
 ```
 
 ### Claude Code
 
 ```
 git clone https://github.com/ohXiaoMing996/cc-gpt-image-2.5-skill ~/.claude/skills/cc-gpt-image-2.5-skill
+# 国内速度更快：git clone https://gitee.com/OhXiaoming/cc-gpt-image-2.5-skill ~/.claude/skills/cc-gpt-image-2.5-skill
 ```
 
 > 也可以让 agent 自己挑路径（比如项目级 `.claude/skills/` 或 `.workbuddy/skills/`），只要 SKILL.md 能被发现就行。
