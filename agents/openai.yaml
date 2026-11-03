@@ -1,0 +1,4 @@
+interface:
+  display_name: "cc-gpt-image-2.5"
+  short_description: "GPT Image 2.5 文生图 / 图生图（默认 flare，4K 自动切 sunburst）"
+  default_prompt: "Use $cc-gpt-image-2.5-skill to generate or edit an image with GPT Image 2.5 via the OpenAI-compatible API."

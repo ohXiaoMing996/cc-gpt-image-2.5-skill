@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+# cc-gpt-image-2.5-skill — 薄壳入口。
+# 自动定位脚本、自检 python3、首次调用时建 .venv 并装 requests，
+# 然后 exec 真实 cc_imagegen.py，参数原样透传。
+#
+# 使用（与 SKILL.md 一致）：
+#   $SKILL_PATH/bin/cc_imagegen generate --prompt "..."
+#   $SKILL_PATH/bin/cc_imagegen config  --api-key sk-xxx --base-url https://xxx/v1
+
+set -euo pipefail
+
+SKILL_PATH="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+SCRIPT="${SKILL_PATH}/scripts/cc_imagegen.py"
+VENV="${SKILL_PATH}/.venv"
+VENV_PY="${VENV}/bin/python"
+
+# —— 找一个能用的 python3 ——
+find_python() {
+  for c in python3 python /usr/bin/python3 /usr/local/bin/python3 /opt/homebrew/bin/python3; do
+    if command -v "$c" >/dev/null 2>&1; then
+      echo "$c"; return 0
+    fi
+    if [ -x "$c" ]; then
+      echo "$c"; return 0
+    fi
+  done
+  return 1
+}
+
+PY="$(find_python)" || {
+  echo "[cc-gpt-image] 找不到 python3。请安装 Python 3.9+ 后重试。" >&2
+  exit 1
+}
+
+# —— 已建过 venv：直接用 ——
+if [ -x "$VENV_PY" ]; then
+  exec "$VENV_PY" "$SCRIPT" "$@"
+fi
+
+# —— 首次：建 venv 装依赖 ——
+echo "[cc-gpt-image] 首次运行，初始化 .venv + requests ..." >&2
+"$PY" -m venv "$VENV"
+"$VENV_PY" -m pip install --quiet --disable-pip-version-check --upgrade pip
+"$VENV_PY" -m pip install --quiet --disable-pip-version-check requests
+echo "[cc-gpt-image] 依赖就绪：$VENV" >&2
+
+exec "$VENV_PY" "$SCRIPT" "$@"
